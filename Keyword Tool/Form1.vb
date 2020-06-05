@@ -23,7 +23,7 @@
                 statusLabel.Text = "Status: started"
                 statusLabel.Update()
                 outputTextBox.Text = ""
-                Dim Input As String() = keywordTextBox.Text.Split(New [Char]() {CChar(vbCrLf)})
+                Dim Input As String() = keywordTextBox.Text.Split(New String() {Environment.NewLine}, StringSplitOptions.None)
                 For Each keyword As String In Input
                     Dim Mails As String() = mailProvidersTextBox.Text.Split(New String() {Environment.NewLine}, StringSplitOptions.None)
                     For Each mail As String In Mails

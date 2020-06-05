@@ -25,6 +25,7 @@ Partial Class Form1
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.ThirteenForm1 = New Keyword_Tool.ThirteenForm()
+        Me.Label4 = New System.Windows.Forms.Label()
         Me.ThirteenControlBox1 = New Keyword_Tool.ThirteenControlBox()
         Me.outputTextBox = New Keyword_Tool.ThirteenTextBox()
         Me.statusLabel = New System.Windows.Forms.Label()
@@ -45,6 +46,7 @@ Partial Class Form1
         Me.ThirteenForm1.AccentColor = System.Drawing.Color.Violet
         Me.ThirteenForm1.BackColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(50, Byte), Integer), CType(CType(50, Byte), Integer))
         Me.ThirteenForm1.ColorScheme = Keyword_Tool.ThirteenForm.ColorSchemes.Dark
+        Me.ThirteenForm1.Controls.Add(Me.Label4)
         Me.ThirteenForm1.Controls.Add(Me.ThirteenControlBox1)
         Me.ThirteenForm1.Controls.Add(Me.outputTextBox)
         Me.ThirteenForm1.Controls.Add(Me.statusLabel)
@@ -65,6 +67,15 @@ Partial Class Form1
         Me.ThirteenForm1.Size = New System.Drawing.Size(571, 489)
         Me.ThirteenForm1.TabIndex = 0
         Me.ThirteenForm1.Text = "Keyword Tool - By iLoveJan ❤"
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(308, 150)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(63, 19)
+        Me.Label4.TabIndex = 52
+        Me.Label4.Text = "Left: "
         '
         'ThirteenControlBox1
         '
@@ -241,5 +252,6 @@ Partial Class Form1
     Friend WithEvents mailProvidersTextBox As Keyword_Tool.ThirteenTextBox
     Friend WithEvents SaveFileDialog1 As System.Windows.Forms.SaveFileDialog
     Friend WithEvents ThirteenControlBox1 As Keyword_Tool.ThirteenControlBox
+    Friend WithEvents Label4 As System.Windows.Forms.Label
 
 End Class
