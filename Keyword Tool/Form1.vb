@@ -14,7 +14,7 @@ Public Class Form1
         'Me.Icon = New Icon(Me.GetType(), "Goescat-Macaron-Terminator.ico")
     End Sub
 
-    Private Sub startButton_Click(sender As Object, e As EventArgs)
+    Private Sub startButton_Click(sender As Object, e As EventArgs) Handles startButton.Click
         onOff = True
         thread = New System.Threading.Thread(AddressOf main)
         thread.Start()
@@ -48,7 +48,7 @@ Public Class Form1
         End If
     End Sub
 
-    Private Sub stopButton_Click(sender As Object, e As EventArgs)
+    Private Sub stopButton_Click(sender As Object, e As EventArgs) Handles stopButton.Click
         Try
             thread.Abort()
             statusLabel.Text = "Status: stopped"
@@ -57,7 +57,7 @@ Public Class Form1
         End Try
     End Sub
 
-    Private Sub exportButton_Click(sender As Object, e As EventArgs)
+    Private Sub exportButton_Click(sender As Object, e As EventArgs) Handles exportButton.Click
         If (outputTextBox.Text.Length > 0) Then
             SaveFileDialog1.ShowDialog()
             System.IO.File.WriteAllText(SaveFileDialog1.FileName, outputTextBox.Text)
@@ -88,7 +88,7 @@ Public Class Form1
         End Using
     End Sub
 
-    Private Sub shareButton_CheckedChanged(sender As Object)
+    Private Sub shareButton_CheckedChanged(sender As Object) Handles shareButton.CheckedChanged
         If (sharingAllowed = True) Then
             sharingAllowed = False
         Else
