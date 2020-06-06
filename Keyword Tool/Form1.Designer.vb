@@ -25,7 +25,7 @@ Partial Class Form1
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.ThirteenForm1 = New Keyword_Tool.ThirteenForm()
-        Me.Label4 = New System.Windows.Forms.Label()
+        Me.shareButton = New Keyword_Tool.ThirteenCheckBox()
         Me.ThirteenControlBox1 = New Keyword_Tool.ThirteenControlBox()
         Me.outputTextBox = New Keyword_Tool.ThirteenTextBox()
         Me.statusLabel = New System.Windows.Forms.Label()
@@ -46,7 +46,7 @@ Partial Class Form1
         Me.ThirteenForm1.AccentColor = System.Drawing.Color.Violet
         Me.ThirteenForm1.BackColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(50, Byte), Integer), CType(CType(50, Byte), Integer))
         Me.ThirteenForm1.ColorScheme = Keyword_Tool.ThirteenForm.ColorSchemes.Dark
-        Me.ThirteenForm1.Controls.Add(Me.Label4)
+        Me.ThirteenForm1.Controls.Add(Me.shareButton)
         Me.ThirteenForm1.Controls.Add(Me.ThirteenControlBox1)
         Me.ThirteenForm1.Controls.Add(Me.outputTextBox)
         Me.ThirteenForm1.Controls.Add(Me.statusLabel)
@@ -65,17 +65,20 @@ Partial Class Form1
         Me.ThirteenForm1.Location = New System.Drawing.Point(0, 0)
         Me.ThirteenForm1.Name = "ThirteenForm1"
         Me.ThirteenForm1.Size = New System.Drawing.Size(571, 489)
-        Me.ThirteenForm1.TabIndex = 0
+        Me.ThirteenForm1.TabIndex = 1
         Me.ThirteenForm1.Text = "Keyword Tool - By iLoveJan ❤"
         '
-        'Label4
+        'shareButton
         '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(308, 150)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(63, 19)
-        Me.Label4.TabIndex = 52
-        Me.Label4.Text = "Left: "
+        Me.shareButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(50, Byte), Integer), CType(CType(50, Byte), Integer))
+        Me.shareButton.Checked = True
+        Me.shareButton.ColorScheme = Keyword_Tool.ThirteenCheckBox.ColorSchemes.Dark
+        Me.shareButton.ForeColor = System.Drawing.Color.White
+        Me.shareButton.Location = New System.Drawing.Point(312, 140)
+        Me.shareButton.Name = "shareButton"
+        Me.shareButton.Size = New System.Drawing.Size(57, 17)
+        Me.shareButton.TabIndex = 52
+        Me.shareButton.Text = "Share"
         '
         'ThirteenControlBox1
         '
@@ -107,7 +110,7 @@ Partial Class Form1
         '
         Me.statusLabel.AutoSize = True
         Me.statusLabel.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.statusLabel.Location = New System.Drawing.Point(309, 137)
+        Me.statusLabel.Location = New System.Drawing.Point(309, 160)
         Me.statusLabel.Name = "statusLabel"
         Me.statusLabel.Size = New System.Drawing.Size(49, 13)
         Me.statusLabel.TabIndex = 47
@@ -239,6 +242,8 @@ Partial Class Form1
 
     End Sub
     Friend WithEvents ThirteenForm1 As Keyword_Tool.ThirteenForm
+    Friend WithEvents shareButton As Keyword_Tool.ThirteenCheckBox
+    Friend WithEvents ThirteenControlBox1 As Keyword_Tool.ThirteenControlBox
     Friend WithEvents outputTextBox As Keyword_Tool.ThirteenTextBox
     Friend WithEvents statusLabel As System.Windows.Forms.Label
     Friend WithEvents mailProviderTextBox As Keyword_Tool.ThirteenTextBox
@@ -251,7 +256,5 @@ Partial Class Form1
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents mailProvidersTextBox As Keyword_Tool.ThirteenTextBox
     Friend WithEvents SaveFileDialog1 As System.Windows.Forms.SaveFileDialog
-    Friend WithEvents ThirteenControlBox1 As Keyword_Tool.ThirteenControlBox
-    Friend WithEvents Label4 As System.Windows.Forms.Label
 
 End Class
