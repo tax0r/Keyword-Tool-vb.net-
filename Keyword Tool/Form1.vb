@@ -9,9 +9,19 @@ Public Class Form1
 
     Dim counter As Integer = 0
 
+    Function getMailProviders() As String
+        'https://pastebin.com/raw/n0fsBKWz
+        Using request As New HttpRequest
+            request.UserAgent = Http.ChromeUserAgent
+            Dim response As String = request.Get("https://pastebin.com/raw/n0fsBKWz").ToString
+            Return response
+        End Using
+    End Function
+
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles Me.Load
         Control.CheckForIllegalCrossThreadCalls = False
         'Me.Icon = New Icon(Me.GetType(), "Goescat-Macaron-Terminator.ico")
+        mailProvidersTextBox.Text = getMailProviders()
     End Sub
 
     Private Sub startButton_Click(sender As Object, e As EventArgs) Handles startButton.Click
