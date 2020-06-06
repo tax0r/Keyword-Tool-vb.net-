@@ -10,4 +10,3 @@ D:\VS Projekte\Keyword Tool\Keyword Tool\obj\Debug\Keyword Tool.pdb
 D:\VS Projekte\Keyword Tool\Keyword Tool\obj\Debug\Keyword_Tool.Form1.resources
 D:\VS Projekte\Keyword Tool\Keyword Tool\bin\Debug\MaterialSkin.dll
 D:\VS Projekte\Keyword Tool\Keyword Tool\obj\Debug\Keyword Tool.vbprojResolveAssemblyReference.cache
-D:\VS Projekte\Keyword Tool\Keyword Tool\bin\Debug\xNet.dll
