@@ -6,7 +6,7 @@ My Keyword tool i coded in python before. The whole thing got updated and now ha
 
 **_BTC WALLET: 17jsEcSVCdBX9BxsswzdW5eo8Z7oz3raRr_**
 
-![showcase picture](https://i.imgur.com/e8SfGxh.png)
+![showcase picture](https://i.imgur.com/hS7PjGU.png)
 
 - Added GUI
 - Export button & dialogue 
