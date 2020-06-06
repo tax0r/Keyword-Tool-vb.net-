@@ -1,4 +1,4 @@
-# Keyword Tool - by iLoveJan v1.1-
+# Keyword Tool - by iLoveJan
 My Keyword tool i coded in python before. The whole thing got updated and now has a real Gui and much more new usability features.
 
 **If you like my Programm, please consider donating and helping me out a lot!**
