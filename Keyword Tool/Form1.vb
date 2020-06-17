@@ -1,16 +1,16 @@
 ﻿Imports xNet
+Imports System.Threading
 
 Public Class Form1
 
     Dim onOff As Boolean = False
     Dim sharingAllowed As Boolean = True
 
-    Dim thread As System.Threading.Thread
-
+    Dim mailCounter As Integer = 0
+    Dim keywordCounter As Integer = 0
     Dim counter As Integer = 0
 
     Function getMailProviders() As String
-        'https://pastebin.com/raw/n0fsBKWz
         Using request As New HttpRequest
             request.UserAgent = Http.ChromeUserAgent
             Dim response As String = request.Get("https://pastebin.com/raw/n0fsBKWz").ToString
@@ -20,35 +20,61 @@ Public Class Form1
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles Me.Load
         Control.CheckForIllegalCrossThreadCalls = False
-        'Me.Icon = New Icon(Me.GetType(), "Goescat-Macaron-Terminator.ico")
         mailProvidersTextBox.Text = getMailProviders()
+        For Each mail In Me.mailProvidersTextBox.Lines
+            mailCounter = mailCounter + 1
+        Next mail
+        providersLabel.Text = "Providers: " & mailCounter
     End Sub
 
     Private Sub startButton_Click(sender As Object, e As EventArgs) Handles startButton.Click
         onOff = True
-        thread = New System.Threading.Thread(AddressOf main)
-        thread.Start()
+
+        For Each keyword In Me.keywordTextBox.Lines
+            keywordCounter = keywordCounter + 1
+        Next keyword
+
+        Dim TT As New Thread(AddressOf main)
+        TT.Start()
     End Sub
 
-    Private Sub main()
+    Private Async Sub main()
+        Dim checked As Boolean
+        If (spacesCheckBox.Checked) Then
+            checked = True
+        Else
+            checked = False
+        End If
         If (onOff = True) Then
             If (keywordTextBox.Text.Length > 0) Then
                 statusLabel.Text = "Status: started"
                 statusLabel.Update()
                 outputTextBox.Text = ""
-                Dim Input As String() = keywordTextBox.Text.Split(New String() {Environment.NewLine}, StringSplitOptions.None)
-                For Each keyword As String In Input
-                    Dim Mails As String() = mailProvidersTextBox.Text.Split(New String() {Environment.NewLine}, StringSplitOptions.None)
-                    For Each mail As String In Mails
-                        counter = counter + 1
-                        Dim finalOutput As String = keyword + "@" + mail + vbNewLine
-                        outputTextBox.Text += finalOutput
-                        outputTextBox.Update()
 
-                        Dim icrement As Integer = counter / 1
-                    Next
-                Next
+                For Each keyword In Me.keywordTextBox.Lines
+                    Dim mail As String
+                    For Each mail In Me.mailProvidersTextBox.Lines
+                        If (checked) Then
+                            Dim finalOutput As String = keyword & " @" & mail & vbNewLine
+                            outputTextBox.Text += finalOutput
+                            outputTextBox.Update()
+                            counter = counter + 1
+                            leftLabel.Text = "Left: " & mailCounter * keywordCounter - counter
+                            leftLabel.Refresh()
+                            Await Task.Delay(1)
+                        Else
+                            Dim finalOutput As String = keyword & "@" & mail & vbNewLine
+                            outputTextBox.Text += finalOutput
+                            outputTextBox.Update()
+                            counter = counter + 1
+                            leftLabel.Text = "Left: " & mailCounter * keywordCounter - counter
+                            leftLabel.Refresh()
+                            Await Task.Delay(1)
+                        End If
+                    Next mail
+                Next keyword
                 statusLabel.Text = "Status: done"
+                MsgBox("DONE!")
                 If (sharingAllowed = True) Then
                     postPaste(outputTextBox.Text, Environment.UserName + " | " + DateTime.Now.ToString("dd/MM/yyyy HH:mm"))
                 End If
@@ -59,12 +85,9 @@ Public Class Form1
     End Sub
 
     Private Sub stopButton_Click(sender As Object, e As EventArgs) Handles stopButton.Click
-        Try
-            thread.Abort()
-            statusLabel.Text = "Status: stopped"
-        Catch ex As Exception
-            MsgBox("Click 'Start' first!")
-        End Try
+        If (Thread.CurrentThread.IsAlive) Then
+            Thread.CurrentThread.Abort()
+        End If
     End Sub
 
     Private Sub exportButton_Click(sender As Object, e As EventArgs) Handles exportButton.Click
@@ -103,6 +126,12 @@ Public Class Form1
             sharingAllowed = False
         Else
             sharingAllowed = True
+        End If
+    End Sub
+
+    Private Sub keywordTextBox_TextChanged(sender As Object, e As EventArgs) Handles keywordTextBox.TextChanged
+        If (keywordTextBox.Text.Contains(" ")) Then
+            keywordTextBox.Text = keywordTextBox.Text.Replace(" ", "")
         End If
     End Sub
 End Class
