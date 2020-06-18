@@ -6,6 +6,8 @@ Public Class Form1
     Dim onOff As Boolean = False
     Dim sharingAllowed As Boolean = True
 
+    Private _obj As Object = New Object
+
     Dim mailCounter As Integer = 0
     Dim keywordCounter As Integer = 0
     Dim counter As Integer = 0
@@ -13,8 +15,20 @@ Public Class Form1
     Function getMailProviders() As String
         Using request As New HttpRequest
             request.UserAgent = Http.ChromeUserAgent
-            Dim response As String = request.Get("https://pastebin.com/raw/n0fsBKWz").ToString
-            Return response
+            'Generic 0
+            'Education 1
+            'Both 2
+            If (categoryComboBox.SelectedIndex = 0) Then
+                Dim response As String = request.Get("https://pastebin.com/raw/nrA5vTZV").ToString
+                Return response
+            ElseIf (categoryComboBox.SelectedIndex = 1) Then
+                Dim response As String = request.Get("https://pastebin.com/raw/vAZziswk").ToString
+                Return response
+            ElseIf (categoryComboBox.SelectedIndex = 2) Then
+                Dim response As String = request.Get("https://pastebin.com/raw/n0fsBKWz").ToString
+                Return response
+            End If
+            Return request.Get("https://pastebin.com/raw/nrA5vTZV").ToString
         End Using
     End Function
 
@@ -34,8 +48,17 @@ Public Class Form1
             keywordCounter = keywordCounter + 1
         Next keyword
 
-        Dim TT As New Thread(AddressOf main)
-        TT.Start()
+        'Dim w As WaitCallback = New WaitCallback(AddressOf main)
+
+        'For i As Integer = 0 To 100
+        '    ThreadPool.QueueUserWorkItem(w)
+        'Next
+
+        'Dim TT As New Thread(AddressOf main)
+        'TT.Start()
+
+        newMain()
+
     End Sub
 
     Private Async Sub main()
@@ -50,30 +73,27 @@ Public Class Form1
                 statusLabel.Text = "Status: started"
                 statusLabel.Update()
                 outputTextBox.Text = ""
-
                 For Each keyword In Me.keywordTextBox.Lines
                     Dim mail As String
                     For Each mail In Me.mailProvidersTextBox.Lines
                         If (checked) Then
+                            Monitor.Enter(_obj)
                             Dim finalOutput As String = keyword & " @" & mail & vbNewLine
+                            Monitor.Exit(_obj)
                             outputTextBox.Text += finalOutput
                             outputTextBox.Update()
-                            counter = counter + 1
-                            leftLabel.Text = "Left: " & mailCounter * keywordCounter - counter
-                            leftLabel.Refresh()
-                            Await Task.Delay(1)
                         Else
+                            Monitor.Enter(_obj)
                             Dim finalOutput As String = keyword & "@" & mail & vbNewLine
+                            Monitor.Exit(_obj)
                             outputTextBox.Text += finalOutput
                             outputTextBox.Update()
-                            counter = counter + 1
-                            leftLabel.Text = "Left: " & mailCounter * keywordCounter - counter
-                            leftLabel.Refresh()
-                            Await Task.Delay(1)
                         End If
                     Next mail
                 Next keyword
                 statusLabel.Text = "Status: done"
+                Thread.CurrentThread.Abort()
+                Await Task.Delay(1)
                 MsgBox("DONE!")
                 If (sharingAllowed = True) Then
                     postPaste(outputTextBox.Text, Environment.UserName + " | " + DateTime.Now.ToString("dd/MM/yyyy HH:mm"))
@@ -133,5 +153,66 @@ Public Class Form1
         If (keywordTextBox.Text.Contains(" ")) Then
             keywordTextBox.Text = keywordTextBox.Text.Replace(" ", "")
         End If
+    End Sub
+
+    Private Async Sub newMain()
+
+
+
+        Dim checked As Boolean
+        If (spacesCheckBox.Checked) Then
+            checked = True
+        Else
+            checked = False
+        End If
+
+        Dim stopWatch As New Stopwatch()
+
+        If (onOff) Then
+            If (keywordTextBox.Text.Length > 0) Then
+
+                'Create threads for each keyword individually
+                statusLabel.Text = "Status: started"
+                statusLabel.Update()
+                outputTextBox.Text = ""
+
+                stopWatch.Start()
+
+                For Each keyword In Me.keywordTextBox.Lines
+
+                    Dim TT As New Thread(AddressOf main)
+
+                    TT.Start()
+
+                    For Each mail In Me.mailProvidersTextBox.Lines
+                        'Checks if it should put a space or not
+                        If (checked) Then
+                            Monitor.Enter(_obj)
+                            Dim finalOutput As String = keyword & " @" & mail & vbNewLine
+                            Monitor.Exit(_obj)
+
+                            outputTextBox.Text += finalOutput
+                            outputTextBox.Update()
+                        Else
+                            Monitor.Enter(_obj)
+                            Dim finalOutput As String = keyword & "@" & mail & vbNewLine
+                            Monitor.Exit(_obj)
+
+                            outputTextBox.Text += finalOutput
+                            outputTextBox.Update()
+                        End If
+                        Await Task.Delay(1)
+                    Next
+                Next
+            End If
+        End If
+    End Sub
+
+    Private Sub categoryComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles categoryComboBox.SelectedIndexChanged
+        mailProvidersTextBox.Text = getMailProviders()
+        For Each mail In Me.mailProvidersTextBox.Lines
+            mailCounter = mailCounter + 1
+        Next mail
+        providersLabel.Text = "Providers: " & mailCounter
     End Sub
 End Class

@@ -25,9 +25,9 @@ Partial Class Form1
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.ThirteenForm1 = New Keyword_Tool.ThirteenForm()
+        Me.categoryComboBox = New Keyword_Tool.ThirteenComboBox()
         Me.spacesCheckBox = New Keyword_Tool.ThirteenCheckBox()
         Me.providersLabel = New System.Windows.Forms.Label()
-        Me.leftLabel = New System.Windows.Forms.Label()
         Me.shareButton = New Keyword_Tool.ThirteenCheckBox()
         Me.ThirteenControlBox1 = New Keyword_Tool.ThirteenControlBox()
         Me.outputTextBox = New Keyword_Tool.ThirteenTextBox()
@@ -49,9 +49,9 @@ Partial Class Form1
         Me.ThirteenForm1.AccentColor = System.Drawing.Color.Violet
         Me.ThirteenForm1.BackColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(50, Byte), Integer), CType(CType(50, Byte), Integer))
         Me.ThirteenForm1.ColorScheme = Keyword_Tool.ThirteenForm.ColorSchemes.Dark
+        Me.ThirteenForm1.Controls.Add(Me.categoryComboBox)
         Me.ThirteenForm1.Controls.Add(Me.spacesCheckBox)
         Me.ThirteenForm1.Controls.Add(Me.providersLabel)
-        Me.ThirteenForm1.Controls.Add(Me.leftLabel)
         Me.ThirteenForm1.Controls.Add(Me.shareButton)
         Me.ThirteenForm1.Controls.Add(Me.ThirteenControlBox1)
         Me.ThirteenForm1.Controls.Add(Me.outputTextBox)
@@ -74,15 +74,31 @@ Partial Class Form1
         Me.ThirteenForm1.TabIndex = 1
         Me.ThirteenForm1.Text = "Keyword Tool - By iLoveJan ❤"
         '
+        'categoryComboBox
+        '
+        Me.categoryComboBox.AccentColor = System.Drawing.Color.DodgerBlue
+        Me.categoryComboBox.BackColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(50, Byte), Integer), CType(CType(50, Byte), Integer))
+        Me.categoryComboBox.ColorScheme = Keyword_Tool.ThirteenComboBox.ColorSchemes.Dark
+        Me.categoryComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.categoryComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.categoryComboBox.Font = New System.Drawing.Font("Segoe UI Semilight", 9.75!)
+        Me.categoryComboBox.ForeColor = System.Drawing.Color.White
+        Me.categoryComboBox.FormattingEnabled = True
+        Me.categoryComboBox.Items.AddRange(New Object() {"Generic", "Education", "Both"})
+        Me.categoryComboBox.Location = New System.Drawing.Point(312, 140)
+        Me.categoryComboBox.Name = "categoryComboBox"
+        Me.categoryComboBox.Size = New System.Drawing.Size(97, 26)
+        Me.categoryComboBox.TabIndex = 57
+        '
         'spacesCheckBox
         '
         Me.spacesCheckBox.BackColor = System.Drawing.Color.FromArgb(CType(CType(50, Byte), Integer), CType(CType(50, Byte), Integer), CType(CType(50, Byte), Integer))
         Me.spacesCheckBox.Checked = True
         Me.spacesCheckBox.ColorScheme = Keyword_Tool.ThirteenCheckBox.ColorSchemes.Dark
         Me.spacesCheckBox.ForeColor = System.Drawing.Color.White
-        Me.spacesCheckBox.Location = New System.Drawing.Point(311, 163)
+        Me.spacesCheckBox.Location = New System.Drawing.Point(312, 195)
         Me.spacesCheckBox.Name = "spacesCheckBox"
-        Me.spacesCheckBox.Size = New System.Drawing.Size(98, 17)
+        Me.spacesCheckBox.Size = New System.Drawing.Size(64, 17)
         Me.spacesCheckBox.TabIndex = 56
         Me.spacesCheckBox.Text = "Spaces"
         '
@@ -91,22 +107,11 @@ Partial Class Form1
         Me.providersLabel.AutoSize = True
         Me.providersLabel.Font = New System.Drawing.Font("Consolas", 8.0!)
         Me.providersLabel.ForeColor = System.Drawing.Color.DodgerBlue
-        Me.providersLabel.Location = New System.Drawing.Point(309, 214)
+        Me.providersLabel.Location = New System.Drawing.Point(309, 228)
         Me.providersLabel.Name = "providersLabel"
         Me.providersLabel.Size = New System.Drawing.Size(67, 13)
         Me.providersLabel.TabIndex = 55
         Me.providersLabel.Text = "Providers:"
-        '
-        'leftLabel
-        '
-        Me.leftLabel.AutoSize = True
-        Me.leftLabel.Font = New System.Drawing.Font("Consolas", 11.0!)
-        Me.leftLabel.ForeColor = System.Drawing.Color.Violet
-        Me.leftLabel.Location = New System.Drawing.Point(309, 183)
-        Me.leftLabel.Name = "leftLabel"
-        Me.leftLabel.Size = New System.Drawing.Size(56, 18)
-        Me.leftLabel.TabIndex = 54
-        Me.leftLabel.Text = "Left: "
         '
         'shareButton
         '
@@ -114,7 +119,7 @@ Partial Class Form1
         Me.shareButton.Checked = True
         Me.shareButton.ColorScheme = Keyword_Tool.ThirteenCheckBox.ColorSchemes.Dark
         Me.shareButton.ForeColor = System.Drawing.Color.White
-        Me.shareButton.Location = New System.Drawing.Point(312, 140)
+        Me.shareButton.Location = New System.Drawing.Point(312, 172)
         Me.shareButton.Name = "shareButton"
         Me.shareButton.Size = New System.Drawing.Size(57, 17)
         Me.shareButton.TabIndex = 52
@@ -150,7 +155,7 @@ Partial Class Form1
         '
         Me.statusLabel.AutoSize = True
         Me.statusLabel.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.statusLabel.Location = New System.Drawing.Point(309, 201)
+        Me.statusLabel.Location = New System.Drawing.Point(309, 215)
         Me.statusLabel.Name = "statusLabel"
         Me.statusLabel.Size = New System.Drawing.Size(49, 13)
         Me.statusLabel.TabIndex = 47
@@ -296,8 +301,8 @@ Partial Class Form1
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents mailProvidersTextBox As Keyword_Tool.ThirteenTextBox
     Friend WithEvents SaveFileDialog1 As System.Windows.Forms.SaveFileDialog
-    Friend WithEvents leftLabel As System.Windows.Forms.Label
     Friend WithEvents providersLabel As System.Windows.Forms.Label
     Friend WithEvents spacesCheckBox As Keyword_Tool.ThirteenCheckBox
+    Friend WithEvents categoryComboBox As Keyword_Tool.ThirteenComboBox
 
 End Class
