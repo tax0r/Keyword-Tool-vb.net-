@@ -14,3 +14,6 @@ My Keyword tool i coded in python before. The whole thing got updated and now ha
 - Threading
 - Status Indicator
 - added a skin
+- added a category button
+- added a status label
+- added a providers label
